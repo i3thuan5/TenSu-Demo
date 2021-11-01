@@ -33,7 +33,7 @@ export const 遠端查詢 = (語句, 腔口) => (dispatch) => {
   return superagent
     .post(apiFunc)
     .send({
-      'toivun': 語句.trim(),
+      'toivun': 語句.trim().split(/\r?\n/),
     })
     .then(({ body }) => dispatch(收到遠端查詢(語句, 腔口, body)))
     .catch(error => dispatch(遠端查詢發生錯誤(語句, 腔口, error)));
