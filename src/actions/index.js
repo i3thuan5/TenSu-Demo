@@ -28,13 +28,12 @@ export const 遠端查詢發生錯誤 = (語句, 腔口, error) => ({
 
 export const 遠端查詢 = (語句, 腔口) => (dispatch) => {
   dispatch(請求遠端查詢(語句, 腔口));
-  const apiFunc = API.取得查詢函式();
+  const apiFunc = API.標漢字音標();
 
   return superagent
-    .get(apiFunc())
+    .post(apiFunc)
     .query({
-      查詢腔口: 腔口,
-      查詢語句: 語句.trim(),
+      'toivun': 語句.trim(),
     })
     .then(({ body }) => dispatch(收到遠端查詢(語句, 腔口, body)))
     .catch(error => dispatch(遠端查詢發生錯誤(語句, 腔口, error)));
