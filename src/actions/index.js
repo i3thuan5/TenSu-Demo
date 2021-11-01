@@ -16,7 +16,7 @@ export const 收到遠端查詢 = (語句, 腔口, body) => ({
   type: RECIEVE_HANLO,
   語句,
   腔口,
-  查詢結果: {綜合標音:body},
+  查詢結果: { 綜合標音: body },
 });
 
 export const 遠端查詢發生錯誤 = (語句, 腔口, error) => ({
@@ -33,9 +33,9 @@ export const 遠端查詢 = (語句, 腔口) => (dispatch) => {
   return superagent
     .post(apiFunc)
     .send({
-      'toivun': 語句.trim().split(/\r?\n/),
+      toivun: 語句.trim().split(/\r?\n/),
     })
-    .then(({text}) => dispatch(收到遠端查詢(語句, 腔口, JSON.parse(text))))
+    .then(({ text }) => dispatch(收到遠端查詢(語句, 腔口, JSON.parse(text))))
     .catch(error => dispatch(遠端查詢發生錯誤(語句, 腔口, error)));
 };
 
