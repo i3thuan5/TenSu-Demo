@@ -18,7 +18,7 @@ class 漢羅列表 extends React.Component {
         <HanLoTsua
           key={i}
           src={src}
-          漢字={綜音.漢字}
+          漢字={綜音.漢字.replace(/./g, '$& ')}
           羅馬字={綜音.羅馬字}/>
         );
       })}
