@@ -32,7 +32,7 @@ export const 遠端查詢 = (語句, 腔口) => (dispatch) => {
 
   return superagent
     .post(apiFunc)
-    .query({
+    .send({
       'toivun': 語句.trim(),
     })
     .then(({ body }) => dispatch(收到遠端查詢(語句, 腔口, body)))
