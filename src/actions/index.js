@@ -16,7 +16,7 @@ export const 收到遠端查詢 = (語句, 腔口, body) => ({
   type: RECIEVE_HANLO,
   語句,
   腔口,
-  查詢結果: body,
+  查詢結果: { 綜合標音: body },
 });
 
 export const 遠端查詢發生錯誤 = (語句, 腔口, error) => ({
@@ -28,15 +28,14 @@ export const 遠端查詢發生錯誤 = (語句, 腔口, error) => ({
 
 export const 遠端查詢 = (語句, 腔口) => (dispatch) => {
   dispatch(請求遠端查詢(語句, 腔口));
-  const apiFunc = API.取得查詢函式();
+  const apiFunc = API.標漢字音標();
 
   return superagent
-    .get(apiFunc())
-    .query({
-      查詢腔口: 腔口,
-      查詢語句: 語句.trim(),
+    .post(apiFunc)
+    .send({
+      toivun: 語句.trim().split(/\r?\n/),
     })
-    .then(({ body }) => dispatch(收到遠端查詢(語句, 腔口, body)))
+    .then(({ text }) => dispatch(收到遠端查詢(語句, 腔口, JSON.parse(text))))
     .catch(error => dispatch(遠端查詢發生錯誤(語句, 腔口, error)));
 };
 

@@ -14,7 +14,9 @@ export const 正規化綜合標音 = (綜合標音 = []) => {
   ));
   return 綜合標音.map((t) => {
     const result = {};
-    result.羅馬字 = t.臺羅閏號調 || t.臺灣客話;
+    result.羅馬字 = t.lomasii;
+    result.漢字 = t.honsii;
+    result.分詞 = t.funcii;
     newKeys.forEach((k) => { result[k] = t[k]; });
     return result;
   });
@@ -33,7 +35,7 @@ const 查詢結果 = (state = 初始state(), action) => {
     return {
       結果語句: action.語句,
       結果腔口: action.腔口,
-      分詞: action.查詢結果.分詞,
+      分詞: action.查詢結果.綜合標音[0].funcii,
       綜合標音: 正規化綜合標音(action.查詢結果.綜合標音),
     };
   case RECIEVE_ERROR_HANLO:

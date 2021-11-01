@@ -3,11 +3,10 @@ import config from "../config";
 const api = {};
 const self = api;
 
+api.tensu網域 = () => ("https://tensu-hokbu.ithuan.tw/");
 api.網域 = () => ("https://hts.ithuan.tw/");
 
-api.標漢字音標 = () => `${self.網域()}標漢字音標`;
-
-api.正規化翻譯 = () => `${self.網域()}正規化翻譯`;
+api.標漢字音標 = () => `${self.tensu網域()}`;
 
 api.語音合成 = ({ 腔口 = "", 分詞 = "" } = {}) =>
   encodeURI(`${self.網域()}語音合成?` +
