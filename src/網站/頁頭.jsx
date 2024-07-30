@@ -1,5 +1,5 @@
 import React from "react";
-import 'semantic-ui-css/components/message.min.css';
+import "semantic-ui-css/components/message.min.css";
 
 const 頁頭 = () => (
   <div className='app block'>
